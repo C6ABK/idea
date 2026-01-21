@@ -2,7 +2,7 @@
 
 use App\Models\User;
 
-it('logs in a user', function() {
+it('logs in a user', function () {
     $user = User::factory()->create(['password' => 'password123']);
 
     visit('/login')
@@ -14,7 +14,7 @@ it('logs in a user', function() {
     $this->assertAuthenticated();
 });
 
-it('logs out a user', function() {
+it('logs out a user', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
@@ -23,5 +23,4 @@ it('logs out a user', function() {
 
     $this->assertGuest();
 
-   
 });

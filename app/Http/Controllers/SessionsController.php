@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Auth;
@@ -7,7 +9,7 @@ use Illuminate\Http\Request;
 
 class SessionsController extends Controller
 {
-    public function create() 
+    public function create()
     {
         return view('auth.login');
     }
@@ -30,7 +32,8 @@ class SessionsController extends Controller
         return redirect()->intended('/')->with('success', 'You are now logged in.');
 
     }
-    public function destroy(Request $request) 
+
+    public function destroy(Request $request)
     {
         Auth::logout();
 
