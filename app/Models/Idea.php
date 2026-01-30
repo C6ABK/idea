@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class Idea extends Model
 {
@@ -26,6 +27,17 @@ class Idea extends Model
     protected $attributes = [
         'status' => IdeaStatus::PENDING->value,
     ];
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::deleting(function (Idea $idea) {
+            if ($idea->image_path) {
+                Storage::disk('public')->delete($idea->image_path);
+            }
+        });
+    }
 
     public static function statusCounts(User $user): Collection
     {
