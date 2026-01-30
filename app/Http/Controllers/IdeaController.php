@@ -43,7 +43,7 @@ class IdeaController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(IdeaRequest $request, CreateIdea $action)
-    {       
+    {
         $action->handle($request->safe()->all());
 
         return to_route('idea.index')
@@ -75,10 +75,10 @@ class IdeaController extends Controller
      */
     public function update(IdeaRequest $request, Idea $idea, UpdateIdea $action)
     {
-        Gate::authorize('workWith', $idea);    
+        Gate::authorize('workWith', $idea);
 
         $action->handle($request->safe()->all(), $idea);
-        
+
         return back()->with('success', 'Idea updated!');
     }
 
